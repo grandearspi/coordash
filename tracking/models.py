@@ -28,4 +28,12 @@ class Address(models.Model):
     def __str__(self):
         return self.attentionTo + " " + self.country
 
+class Shipment(models.Model):
+    member = models.ForeignKey(Member, on_delete = models.CASCADE)
+    award = models.ManyToManyField(Award)
+    address = models.ForeignKey(Address, on_delete = models.CASCADE)
+    tracking = models.CharField(max_length = 20, blank = True)
+    ship_date = models.DateField(blank = True)
 
+    def __str__(self):
+        return str(self.member) + " " + str(self.award)
